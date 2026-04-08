@@ -34,7 +34,13 @@ Features
 
 Screenshots
 
-*(Add screenshots of your login page and dashboard here)*
+Login Page
+![Login Page](login.png)
+
+Dashboard
+![Dashboard](dashboard.png)
+![Dashboard1](dashboard1.png)
+![Dashboard2](dashboard2.png)
 
 How to Run the Project
 
@@ -46,7 +52,8 @@ Method 1: Local Run
 Method 2: Live Deployment
 
 This project is hosted using GitHub Pages:
-👉 
+[Live Demo]:
+     https://sushmika24.github.io/novatech-dashboard/
 
 Login Credentials
 
