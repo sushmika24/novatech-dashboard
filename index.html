@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NovaTech Smart Dashboard</title>
+
+<!-- Chart.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f4f6f9;
+}
+
+/* Center Login */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Card */
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Inputs */
+input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+/* Button */
+button {
+    padding: 10px;
+    background: #0072c6;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Navbar */
+.navbar {
+    background: #0072c6;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Dashboard */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 20px;
+}
+
+.iframe-box {
+    padding: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+#error {
+    color: red;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGIN PAGE -->
+
+<div id="loginPage" class="center">
+    <div class="card">
+        <h2>NovaTech Login</h2>
+        <input id="username" placeholder="Username">
+        <input id="password" type="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <p id="error"></p>
+    </div>
+</div>
+
+<!-- DASHBOARD -->
+
+<div id="dashboardPage" class="hidden">
+
+```
+<div class="navbar">
+    <h2>NovaTech Sales Dashboard</h2>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<!-- Charts -->
+<div class="grid">
+    <div class="card">
+        <h3>Sales by Model</h3>
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <div class="card">
+        <h3>Sales Trend</h3>
+        <canvas id="lineChart"></canvas>
+    </div>
+
+    <div class="card">
+        <h3>Channel Split</h3>
+        <canvas id="pieChart"></canvas>
+    </div>
+</div>
+
+<!-- Cognos Dashboard -->
+<div class="iframe-box">
+    <h3>Cognos Dashboard</h3>
+    <iframe 
+        src="https://ap2.ca.analytics.ibm.com/bi/?perspective=dashboard&pathRef=.my_folders%2FMobile%2BSales%2Bdashboard&closeWindowOnLastView=true&ui_appbar=false&ui_navbar=false&shareMode=embedded&action=view&mode=dashboard&subView=model0000019d6bfdd5c9_00000003&nav_filter=true"
+        width="100%" height="500">
+    </iframe>
+</div>
+```
+
+</div>
+
+<script>
+
+// LOGIN FUNCTION (Simulated backend)
+function login() {
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    if (user === "admin" && pass === "1234") {
+        document.getElementById("loginPage").classList.add("hidden");
+        document.getElementById("dashboardPage").classList.remove("hidden");
+        loadCharts();
+    } else {
+        document.getElementById("error").innerText = "Invalid credentials!";
+    }
+}
+
+// LOGOUT
+function logout() {
+    document.getElementById("dashboardPage").classList.add("hidden");
+    document.getElementById("loginPage").classList.remove("hidden");
+}
+
+// LOAD CHARTS
+function loadCharts() {
+
+    new Chart(document.getElementById("barChart"), {
+        type: "bar",
+        data: {
+            labels: ["Model A", "Model B", "Model C"],
+            datasets: [{
+                label: "Units Sold",
+                data: [120, 90, 70]
+            }]
+        }
+    });
+
+    new Chart(document.getElementById("lineChart"), {
+        type: "line",
+        data: {
+            labels: ["Jan", "Feb", "Mar"],
+            datasets: [{
+                label: "Revenue",
+                data: [500, 700, 600]
+            }]
+        }
+    });
+
+    new Chart(document.getElementById("pieChart"), {
+        type: "pie",
+        data: {
+            labels: ["Retail", "Online"],
+            datasets: [{
+                data: [60, 40]
+            }]
+        }
+    });
+}
+
+</script>
+
+</body>
+</html>
